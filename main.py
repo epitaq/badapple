@@ -15,9 +15,11 @@ def create_pi (im, width):
     #im = cv2.imread(path)
     im_s = scale_to_width(im, width)
     im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
-    thresh = 128
-    im_bool = (im_g > thresh) * 1
-    #cv2.imwrite('test2.png',im_bool)
+    #二値化
+    # thresh = 128
+    # im_bool = (im_g > thresh) * 1
+    #im_bool = cv2.adaptiveThreshold(im_g, 1, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 7, 0)
+    ret, im_bool = cv2.threshold(im_g, 0, 1, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     for i in im_bool:
         for i1 in i:
             print(pixel[i1],end='')
@@ -45,7 +47,5 @@ def create_mv (path, width):
 
 
 if __name__ == "__main__":
-    width = 80
-    # img = cv2.imread('test1.jpg')
-    # create_pi(img, width)
+    width = 50
     create_mv('test.mp4', width)
