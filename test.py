@@ -1,2 +1,5 @@
-for i in range(0,200):
-    print('*',end='')
+lst = ['*',' ']
+for i in range(100):
+    print(lst[0],end='')
+for i in range(100):
+    print(lst[1],end='')
