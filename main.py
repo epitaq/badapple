@@ -31,8 +31,10 @@ def create_mv (path, width):
     sleep_time = (1000//(cap.get(cv2.CAP_PROP_FPS)))/1000
     #上書き表示用の定数
     ret, frame = cap.read()
-    sz = np.shape(frame)
+    im_s = scale_to_width(frame, width)
+    sz = np.shape(im_s)
     ow = '\033[' + str(sz[0]+1) + 'A'
+    create_pi(frame, width)
     #2フレーム以降の表示
     while True:
         ret, frame = cap.read()
