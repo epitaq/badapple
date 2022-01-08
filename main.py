@@ -56,7 +56,7 @@ def create_mv (path, width):
             break
     #print(tim)
 
-
+a = ['＊','＋','・','　']
 
 if __name__ == "__main__":
     width = 50
