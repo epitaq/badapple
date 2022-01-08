@@ -10,20 +10,42 @@ def scale_to_width(img, width):
     dst = cv2.resize(img, dsize=(width, height))
     return dst
 
-def create_pi (im, width):
+def create_pi_2 (im, width):
+    """
+    BGR画像を入力し二値化した画像を出力
+    """
     pixel = ['＊', '・']
     #im = cv2.imread(path)
     im_s = scale_to_width(im, width)
     im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
     #二値化
-    # thresh = 128
-    # im_bool = (im_g > thresh) * 1
-    #im_bool = cv2.adaptiveThreshold(im_g, 1, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 7, 0)
     ret, im_bool = cv2.threshold(im_g, 0, 1, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     for i in im_bool:
         for i1 in i:
             print(pixel[i1],end='')
         print()
+
+def create_pi_gray (im, width):
+    """
+    BGR画像を入力し四つの記号に変換した画像を出力
+    """
+    pixel = ['＊','＋','・','　']
+    #im = cv2.imread(path)
+    im_s = scale_to_width(im, width)
+    im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
+    sh = np.shape(im_g)
+    im_4 = [[0 for i in range(sh[1])] for i in range(sh[0])]
+    #記号化
+    a = 255 // (len(pixel)-1)
+    for i in range(sh[0]):
+        for i1 in range(sh[1]):
+            im_4[i][i1] = im_g[i][i1] // a
+    #出力
+    for i in im_4:
+        for i1 in i:
+            print(pixel[i1],end='')
+        print()
+    #print(im_4)
 
 
 def create_mv (path, width):
@@ -36,7 +58,7 @@ def create_mv (path, width):
     im_s = scale_to_width(frame, width)
     sz = np.shape(im_s)
     ow = '\033[' + str(sz[0]+1) + 'A'
-    create_pi(frame, width)
+    create_pi_gray(frame, width)
     #2フレーム以降の表示
     time0 = time.time()
     while True:
@@ -44,11 +66,11 @@ def create_mv (path, width):
         ret, frame = cap.read()
         if ret:
             print(ow)
-            create_pi(frame, width)
+            create_pi_gray(frame, width)
             time1 = time.time()
             sleep_time = sleep_time_d - (time1 - time0)
             if sleep_time <= 0:
-                sleep_time = 0.001
+                sleep_time = 0
             #tim.append(sleep_time)
             time.sleep(sleep_time)
         else:
@@ -56,8 +78,10 @@ def create_mv (path, width):
             break
     #print(tim)
 
-a = ['＊','＋','・','　']
+
 
 if __name__ == "__main__":
     width = 50
     create_mv('badapple.mp4', width)
+    # im = cv2.imread('test2.png')
+    # im1 = create_pi_gray(im, width)
