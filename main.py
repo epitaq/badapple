@@ -29,7 +29,7 @@ def create_pi_gray (im, width):
     """
     BGR画像を入力し四つの記号に変換した画像を出力
     """
-    pixel = ['＊','＋','・','＾']
+    pixel = ['＊','＋','・','　']
     #im = cv2.imread(path)
     im_s = scale_to_width(im, width)
     im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
@@ -82,6 +82,6 @@ def create_mv (path, width):
 
 if __name__ == "__main__":
     width = 20
-    create_mv('test.mp4', width)
+    create_mv('/mnt/c/users/w17175/documents/work/badapple/badapple/test.mp4', width)
     # im = cv2.imread('test1.jpg')
     # im1 = create_pi_gray(im, width)
