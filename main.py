@@ -43,9 +43,10 @@ def create_pi_gray (im, width):
     #出力
     for i in im_4:
         for i1 in i:
-            print(pixel[i1],end='')
-        print()
-    #print(im_g)
+            #print(pixel[i1],end='')
+            pass
+        #print()
+    print(im_4)
 
 
 def create_mv (path, width):
@@ -82,6 +83,6 @@ def create_mv (path, width):
 
 if __name__ == "__main__":
     width = 40
-    create_mv('cube.mp4', width)
+    create_mv('ba540.mp4', width)
     # im = cv2.imread('test1.jpg')
     # im1 = create_pi_gray(im, width)
