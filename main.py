@@ -39,14 +39,14 @@ def create_pi_gray (im, width):
     a = 255 // (len(pixel)-1)
     for i in range(sh[0]):
         for i1 in range(sh[1]):
-            im_4[i][i1] = im_g[i][i1] // a
+            im_4[i][i1] = round(im_g[i][i1] / a)
     #出力
     for i in im_4:
         for i1 in i:
-            #print(pixel[i1],end='')
+            print(pixel[i1],end='')
             pass
-        #print()
-    print(im_4)
+        print()
+    #print(im_4)
 
 
 def create_mv (path, width):
