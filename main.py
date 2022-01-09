@@ -51,7 +51,7 @@ def create_pi_gray (im, width):
 def create_mv (path, width):
     #tim = []
     cap = cv2.VideoCapture(path)
-    sleep_time_d = (10000//(cap.get(cv2.CAP_PROP_FPS)))/10000
+    sleep_time_d = (1000//(cap.get(cv2.CAP_PROP_FPS)))/1000
     sleep_time = sleep_time_d
     #上書き表示用の定数
     ret, frame = cap.read()
