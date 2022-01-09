@@ -51,7 +51,7 @@ def create_pi_gray (im, width):
 def create_mv (path, width):
     #tim = []
     cap = cv2.VideoCapture(path)
-    sleep_time_d = (1000//(cap.get(cv2.CAP_PROP_FPS)))/1000
+    sleep_time_d = (10000//(cap.get(cv2.CAP_PROP_FPS)))/10000
     sleep_time = sleep_time_d
     #上書き表示用の定数
     ret, frame = cap.read()
@@ -81,7 +81,7 @@ def create_mv (path, width):
 
 
 if __name__ == "__main__":
-    width = 20
-    create_mv('/mnt/c/users/w17175/documents/work/badapple/badapple/test.mp4', width)
+    width = 40
+    create_mv('cube.mp4', width)
     # im = cv2.imread('test1.jpg')
     # im1 = create_pi_gray(im, width)
