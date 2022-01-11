@@ -84,13 +84,8 @@ def create_mv (path, width):
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     width = int(sys.argv[2])
     mv = sys.argv[1]
     create_mv(mv, width)
-=======
-    width = 40
-    create_mv('badapple.mp4', width)
->>>>>>> 218755ea052283e2c1bb53d50b7a678c941695d0
     # im = cv2.imread('test1.jpg')
     # im1 = create_pi_gray(im, width)
