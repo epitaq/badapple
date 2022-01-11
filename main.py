@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import time
+import sys
+
 
 def scale_to_width(img, width):
     """幅が指定した値になるように、アスペクト比を固定して、リサイズする。
@@ -82,7 +84,8 @@ def create_mv (path, width):
 
 
 if __name__ == "__main__":
-    width = 80
-    create_mv('badapple.mp4', width)
+    width = int(sys.argv[2])
+    mv = sys.argv[1]
+    create_mv(mv, width)
     # im = cv2.imread('test1.jpg')
     # im1 = create_pi_gray(im, width)
