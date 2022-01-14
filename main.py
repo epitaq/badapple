@@ -32,23 +32,24 @@ def create_pi_gray (im, width):
     BGR画像を入力し四つの記号に変換した画像を出力
     """
     pixel = ['＊','＋','・','　']
+    #pixel = ['＠','井','＃','＊','＋','！','・','　'] #＠＃＄％＾＆＊（）＿｜？・￥>＜「」い
     #im = cv2.imread(path)
     im_s = scale_to_width(im, width)
     im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
     sh = np.shape(im_g)
-    im_4 = [[0 for i in range(sh[1])] for i in range(sh[0])]
+    im_pi = [[0 for i in range(sh[1])] for i in range(sh[0])]
     #記号化
     a = 255 // (len(pixel)-1)
     for i in range(sh[0]):
         for i1 in range(sh[1]):
-            im_4[i][i1] = round(im_g[i][i1] / a)
+            im_pi[i][i1] = round(im_g[i][i1] / a)
     #出力
-    for i in im_4:
+    for i in im_pi:
         for i1 in i:
             print(pixel[i1],end='')
             pass
         print()
-    #print(im_4)
+    #print(im_pi)
 
 
 def create_mv (path, width):
