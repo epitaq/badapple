@@ -13,8 +13,8 @@ for r in range(1,255,50):
             id = int(16 + 36*(r//h) + 6*(g//h) + (b//h))
             print('\033[38;5;{}m'.format(id) + '{}'.format(id) + '\033[0m' ,end=' ')
             print('({},{},{})'.format(r//h,g//h,b//h) ,end = ' ,')
-            #print()
-            print('\033[38;2;{};{};{}m'.format(r,g,b,) + hex(int(str(r)+str(g)+str(b))) )
+            print()
+            #print('\033[38;2;{};{};{}m'.format(r,g,b,) + hex(int(str(r)+str(g)+str(b))) )
 
 
 # 0-  7:  standard colors (as in ESC [ 30–37 m)
