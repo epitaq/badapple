@@ -1,3 +1,4 @@
+from glob import escape
 import cv2
 import numpy as np
 import time
@@ -27,6 +28,15 @@ def create_pi_2 (im, width):
             print(pixel[i1],end='')
         print()
 
+
+
+def color8 (lst):
+    h = 42.6
+    id = int(16 + 36*(lst[2]//h) + 6*(lst[1]//h) + (lst[0]//h))
+    out = '\033[48;5;' + str(id) + 'm'
+    return out
+
+
 def create_pi_gray (im, width):
     """
     BGR画像を入力し四つの記号に変換した画像を出力
@@ -38,17 +48,22 @@ def create_pi_gray (im, width):
     im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
     sh = np.shape(im_g)
     im_pi = [[0 for i in range(sh[1])] for i in range(sh[0])]
+    col = [[0 for i in range(sh[1])] for i in range(sh[0])]
     #記号化
     a = 255 // (len(pixel)-1)
     for i in range(sh[0]):
         for i1 in range(sh[1]):
+            esc = color8(im_s[i][i1])
+            col[i][i1] = esc
             im_pi[i][i1] = round(im_g[i][i1] / a)
-    #出力
-    for i in im_pi:
-        for i1 in i:
-            print(pixel[i1],end='')
-            pass
+            print(esc, pixel[round(im_g[i][i1] / a)], end='')
         print()
+    #出力
+    # for i in im_pi:
+    #     for i1 in i:
+    #         print(pixel[i1],end='')
+    #         pass
+    #     print()
     #print(im_pi)
 
 
