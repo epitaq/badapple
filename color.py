@@ -9,7 +9,7 @@
 for r in range(1,255,50):
     for g in range(1,255,50):
         for b in range(1,255,50):
-            h = 51
+            h = 42.6
             id = int(16 + round(36*r/h) + round(6*g/h) + round(b/h))
             print('\033[38;5;{}m'.format(id) + '{}'.format(id) + '\033[0m' ,end=' ')
             print('({},{},{})'.format(r//h,g//h,b//h) ,end = ' ,')
