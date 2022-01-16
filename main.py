@@ -72,16 +72,14 @@ def create_pi_color (im, width):
     im_s = scale_to_width(im, width)
     im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
     sh = np.shape(im_g)
-    im_pi = [[0 for i in range(sh[1])] for i in range(sh[0])]
-    col = [[0 for i in range(sh[1])] for i in range(sh[0])]
     #記号化 出力
     a = 255 // (len(pixel)-1)
     for i in range(sh[0]):
         for i1 in range(sh[1]):
             esc = color8(im_s[i][i1])
-            col[i][i1] = esc
-            im_pi[i][i1] = round(im_g[i][i1] / a)
-            print(esc, pixel[round(im_g[i][i1] / a)], end='')
+            num = round(im_g[i][i1] / a)
+            print(esc, end='')
+            print(pixel[num], end='')
         print()
 
 
