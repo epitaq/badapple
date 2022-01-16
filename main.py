@@ -85,7 +85,7 @@ def create_pi_color (im, width):
 
 
 def create_mv (path, width):
-    #tim = []
+    tim = []
     cap = cv2.VideoCapture(path)
     sleep_time_d = (10000//(cap.get(cv2.CAP_PROP_FPS)))/10000
     sleep_time = sleep_time_d
@@ -108,11 +108,11 @@ def create_mv (path, width):
             if sleep_time <= 0:
                 sleep_time = 0
             time.sleep(sleep_time)
-            #tim.append(sleep_time)
+            tim.append(sleep_time)
         else:
             print()
             break
-    #print(tim)
+    print(tim)
 
 
 
