@@ -115,7 +115,7 @@ def create_mv (path, width):
                 time.sleep(sleep_time)
             else:
                 main_sleep_time += main_sleep_time
-                skip *= 2
+                skip += 1
             
             tim.append(sleep_time)
             #tim.append(time1 - time0)
