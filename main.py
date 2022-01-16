@@ -87,8 +87,8 @@ def create_pi_color (im, width):
 def create_mv (path, width):
     tim = []
     cap = cv2.VideoCapture(path)
-    sleep_time_d = (10000//(cap.get(cv2.CAP_PROP_FPS)))/10000
-    sleep_time = sleep_time_d
+    main_sleep_time = (10000//(cap.get(cv2.CAP_PROP_FPS)))/10000
+    sleep_time = main_sleep_time
     #上書き表示用の定数
     ret, frame = cap.read()
     im_s = scale_to_width(frame, width)
@@ -97,20 +97,25 @@ def create_mv (path, width):
     create_pi_color(frame, width)
     #2フレーム以降の表示
     time0 = time.time()
+    #処理が間に合わない場合fpsを半分にする
+    skip = 0
     while True:
-        #time0 = time.time()
+        #fpsの処理
+        for i in range(skip):
+            ret, frame = cap.read()
+        #通常読み込み
+        time0 = time.time()
         ret, frame = cap.read()
         if ret:
             print(ow)
             create_pi_color(frame, width)
             time1 = time.time()
-            sleep_time = sleep_time_d - (time1 - time0)
+            sleep_time = main_sleep_time - (time1 - time0)
             if sleep_time >= 0:
                 time.sleep(sleep_time)
-                time0 = time.time()
             else:
-                ret, frame = cap.read()
-                time0 = time.time()
+                main_sleep_time += main_sleep_time
+                skip *= 2
             
             tim.append(sleep_time)
             #tim.append(time1 - time0)
@@ -118,6 +123,7 @@ def create_mv (path, width):
             print()
             break
     print(tim)
+    print('skip:', skip)
 
 
 
