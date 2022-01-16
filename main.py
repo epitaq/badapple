@@ -111,11 +111,15 @@ def create_mv (path, width):
             create_pi_color(frame, width)
             time1 = time.time()
             sleep_time = main_sleep_time - (time1 - time0)
+            if sleep_time >= main_sleep_time:
+                skip -= 1
+                main_sleep_time = main_sleep_time * (skip + 1)
+                sleep_time = main_sleep_time - (time1 - time0)
             if sleep_time >= 0:
                 time.sleep(sleep_time)
             else:
-                main_sleep_time += main_sleep_time
                 skip += 1
+                main_sleep_time = main_sleep_time * (skip + 1)
             
             tim.append(sleep_time)
             #tim.append(time1 - time0)
