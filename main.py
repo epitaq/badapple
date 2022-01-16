@@ -88,6 +88,7 @@ def create_mv (path, width):
     tim = []
     cap = cv2.VideoCapture(path)
     main_sleep_time = (10000//(cap.get(cv2.CAP_PROP_FPS)))/10000
+    basis_sleep_time = main_sleep_time
     sleep_time = main_sleep_time
     #上書き表示用の定数
     ret, frame = cap.read()
@@ -111,15 +112,15 @@ def create_mv (path, width):
             create_pi_color(frame, width)
             time1 = time.time()
             sleep_time = main_sleep_time - (time1 - time0)
-            if sleep_time >= main_sleep_time:
+            if sleep_time >= basis_sleep_time:
                 skip -= 1
-                main_sleep_time = main_sleep_time * (skip + 1)
+                main_sleep_time = basis_sleep_time * (skip + 1)
                 sleep_time = main_sleep_time - (time1 - time0)
             if sleep_time >= 0:
                 time.sleep(sleep_time)
             else:
                 skip += 1
-                main_sleep_time = main_sleep_time * (skip + 1)
+                main_sleep_time = basis_sleep_time * (skip + 1)
             
             tim.append(sleep_time)
             #tim.append(time1 - time0)
