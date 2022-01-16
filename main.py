@@ -33,8 +33,9 @@ def create_pi_2 (im, width):
 def color8 (lst):
     h = 42.6
     id = int(16 + 36*(lst[2]//h) + 6*(lst[1]//h) + (lst[0]//h))
-    out = '\033[48;5;' + str(id) + 'm'
+    out = '\033[38;5;' + str(id) + 'm'
     return out
+
 
 
 def create_pi_gray (im, width):
@@ -48,8 +49,32 @@ def create_pi_gray (im, width):
     im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
     sh = np.shape(im_g)
     im_pi = [[0 for i in range(sh[1])] for i in range(sh[0])]
-    col = [[0 for i in range(sh[1])] for i in range(sh[0])]
     #記号化
+    a = 255 // (len(pixel)-1)
+    for i in range(sh[0]):
+        for i1 in range(sh[1]):
+            im_pi[i][i1] = round(im_g[i][i1] / a)
+    #出力
+    for i in im_pi:
+        for i1 in i:
+            print(pixel[i1],end='')
+            pass
+        print()
+    #print(im_pi)
+
+def create_pi_color (im, width):
+    """
+    BGR画像を入力し四つの記号に変換し色をつけた画像を出力
+    """
+    pixel = ['＊','＋','・','　']
+    #pixel = ['＠','井','＃','＊','＋','！','・','　'] #＠＃＄％＾＆＊（）＿｜？・￥>＜「」い
+    #im = cv2.imread(path)
+    im_s = scale_to_width(im, width)
+    im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
+    sh = np.shape(im_g)
+    im_pi = [[0 for i in range(sh[1])] for i in range(sh[0])]
+    col = [[0 for i in range(sh[1])] for i in range(sh[0])]
+    #記号化 出力
     a = 255 // (len(pixel)-1)
     for i in range(sh[0]):
         for i1 in range(sh[1]):
@@ -58,13 +83,6 @@ def create_pi_gray (im, width):
             im_pi[i][i1] = round(im_g[i][i1] / a)
             print(esc, pixel[round(im_g[i][i1] / a)], end='')
         print()
-    #出力
-    # for i in im_pi:
-    #     for i1 in i:
-    #         print(pixel[i1],end='')
-    #         pass
-    #     print()
-    #print(im_pi)
 
 
 def create_mv (path, width):
@@ -77,7 +95,7 @@ def create_mv (path, width):
     im_s = scale_to_width(frame, width)
     sz = np.shape(im_s)
     ow = '\033[' + str(sz[0]+1) + 'A'
-    create_pi_gray(frame, width)
+    create_pi_color(frame, width)
     #2フレーム以降の表示
     time0 = time.time()
     while True:
@@ -85,7 +103,7 @@ def create_mv (path, width):
         ret, frame = cap.read()
         if ret:
             print(ow)
-            create_pi_gray(frame, width)
+            create_pi_color(frame, width)
             time1 = time.time()
             sleep_time = sleep_time_d - (time1 - time0)
             if sleep_time <= 0:
