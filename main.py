@@ -93,7 +93,8 @@ def create_mv (path, width):
     #上書き表示用の定数
     ret, frame = cap.read()
     im_s = scale_to_width(frame, width)
-    sz = np.shape(im_s)
+    sz = np.shape(im_s) 
+    #かーそる移動用の定数
     ow = '\033[' + str(sz[0]+1) + 'A'
     create_pi_color(frame, width)
     #2フレーム以降の表示
