@@ -122,7 +122,7 @@ def create_mv (path, width):
             if sleep_time >= 0:
                 time.sleep(sleep_time)
             else:
-                skip += 1
+                skip = 0
                 main_sleep_time = basis_sleep_time * (skip + 1)
             
             #tim.append(sleep_time)
@@ -130,8 +130,8 @@ def create_mv (path, width):
         else:
             print()
             break
-    print(tim)
-    print('skip:', skip)
+    # print(tim)
+    # print('skip:', skip)
 
 
 
