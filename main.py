@@ -98,7 +98,7 @@ def create_mv (path, width):
     #2フレーム以降の表示
     time0 = time.time()
     while True:
-        time0 = time.time()
+        #time0 = time.time()
         ret, frame = cap.read()
         if ret:
             print(ow)
@@ -107,6 +107,7 @@ def create_mv (path, width):
             sleep_time = sleep_time_d - (time1 - time0)
             if sleep_time >= 0:
                 time.sleep(sleep_time)
+                time0 = time.time()
             else:
                 ret, frame = cap.read()
             
