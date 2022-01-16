@@ -78,8 +78,10 @@ def create_pi_color (im, width):
             esc = color8(im_s[i][i1])
             num = round(im_g[i][i1] / a)
             print(esc, end='')
+            print('\033[40m', end='')
+            print('\033[1m', end='')
             print(pixel[num], end='')
-        print()
+        print('\033[0m')
 
 
 def create_mv (path, width):
@@ -105,8 +107,8 @@ def create_mv (path, width):
             sleep_time = sleep_time_d - (time1 - time0)
             if sleep_time <= 0:
                 sleep_time = 0
-            #tim.append(sleep_time)
             time.sleep(sleep_time)
+            #tim.append(sleep_time)
         else:
             print()
             break
