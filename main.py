@@ -105,11 +105,13 @@ def create_mv (path, width):
             create_pi_color(frame, width)
             time1 = time.time()
             sleep_time = sleep_time_d - (time1 - time0)
-            if sleep_time <= 0:
-                sleep_time = 0
-            time.sleep(sleep_time)
-            #tim.append(sleep_time)
-            tim.append(time1 - time0)
+            if sleep_time >= 0:
+                time.sleep(sleep_time)
+            else:
+                ret, frame = cap.read()
+            
+            tim.append(sleep_time)
+            #tim.append(time1 - time0)
         else:
             print()
             break
