@@ -110,6 +110,7 @@ def create_mv (path, width):
                 time0 = time.time()
             else:
                 ret, frame = cap.read()
+                time0 = time.time()
             
             tim.append(sleep_time)
             #tim.append(time1 - time0)
