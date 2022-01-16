@@ -66,9 +66,8 @@ def create_pi_color (im, width):
     """
     BGR画像を入力し四つの記号に変換し色をつけた画像を出力
     """
-    pixel = ['＊','＋','・','　']
-    #pixel = ['＠','井','＃','＊','＋','！','・','　'] #＠＃＄％＾＆＊（）＿｜？・￥>＜「」い
-    #im = cv2.imread(path)
+    #pixel = ['＊','＋','・','　']
+    pixel = ['＃','＊']
     im_s = scale_to_width(im, width)
     im_g = cv2.cvtColor(im_s, cv2.COLOR_BGR2GRAY)
     sh = np.shape(im_g)
