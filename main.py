@@ -106,9 +106,9 @@ def create_mv (path, width):
         for i in range(skip):
             ret, frame = cap.read()
         #通常読み込み
-        time0 = time.time()
         ret, frame = cap.read()
         if ret:
+            time0 = time.time()
             print(ow)
             create_pi_color(frame, width)
             time1 = time.time()
